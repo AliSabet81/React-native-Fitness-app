@@ -1,15 +1,22 @@
-import WorkoutExerciseItem from "@/components/logger/WorkoutExerciseItem";
+import { Redirect, Stack } from "expo-router";
+import { useHeaderHeight } from "@react-navigation/elements";
 import { FlatList, KeyboardAvoidingView, Platform } from "react-native";
 
-import { useHeaderHeight } from "@react-navigation/elements";
-import { Stack } from "expo-router";
+import { useWorkouts } from "@/store";
 import CustomButton from "@/components/general/CustomButton";
 import WorkoutHeader from "@/components/logger/WorkoutHeader";
 import SelectExerciseModal from "@/components/logger/SelectExerciseModal";
-import exercises from "@/data/exercises";
+import WorkoutExerciseItem from "@/components/logger/WorkoutExerciseItem";
 
 export default function CurrentWorkoutScreen() {
+  const currentWorkout = useWorkouts((state) => state.currentWorkout);
+  const finishWorkout = useWorkouts((state) => state.finishWorkout);
+
   const headerHeight = useHeaderHeight();
+
+  if (!currentWorkout) {
+    return <Redirect href={"/"} />;
+  }
 
   return (
     <>
@@ -17,7 +24,7 @@ export default function CurrentWorkoutScreen() {
         options={{
           headerRight: () => (
             <CustomButton
-              onPress={() => console.warn("finish")}
+              onPress={() => finishWorkout()}
               title="Finish"
               style={{ padding: 7, paddingHorizontal: 15, width: "auto" }}
             />
@@ -30,7 +37,7 @@ export default function CurrentWorkoutScreen() {
         keyboardVerticalOffset={headerHeight}
       >
         <FlatList
-          data={exercises}
+          data={currentWorkout.exercises}
           contentContainerStyle={{ gap: 10, padding: 10 }}
           renderItem={({ item }) => <WorkoutExerciseItem exercise={item} />}
           ListHeaderComponent={<WorkoutHeader />}

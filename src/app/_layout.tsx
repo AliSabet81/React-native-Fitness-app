@@ -1,18 +1,16 @@
-import { Stack } from "expo-router";
-import { useColorScheme } from "react-native";
 import {
   ThemeProvider,
   DefaultTheme,
   DarkTheme,
 } from "@react-navigation/native";
-import Colors from "@/constants/Colors";
-
+import { Stack } from "expo-router";
+import { useColorScheme } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+
+import Colors from "@/constants/Colors";
 
 DarkTheme.colors.primary = Colors.dark.tint;
 DefaultTheme.colors.primary = Colors.light.tint;
-
-// SQLite.deleteDatabaseSync(dbName);
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();

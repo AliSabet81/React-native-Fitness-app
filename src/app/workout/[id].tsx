@@ -2,15 +2,16 @@ import dayjs from "dayjs";
 import { useLocalSearchParams } from "expo-router";
 import { FlatList, StyleSheet } from "react-native";
 
-import dummyWorkouts from "@/data/dummyWorkouts";
+import { useWorkouts } from "@/store";
 import { Text } from "@/components/general/Themed";
 import WorkoutExerciseItem from "@/components/workouts/WorkoutExerciseItem";
 
 export default function WorkoutScreen() {
   const { id } = useLocalSearchParams();
 
-  const workout = dummyWorkouts.find((workout) => workout.id === id);
-
+  const workout = useWorkouts((state) =>
+    state.workouts.find((workout) => workout.id === id)
+  );
   if (!workout) {
     return <Text>Workout not found</Text>;
   }

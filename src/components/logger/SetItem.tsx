@@ -1,11 +1,10 @@
-import { View, Text, TextInput } from "@/components/general/Themed";
-import { ExerciseSet } from "@/types/models";
 import { useState } from "react";
 import { StyleSheet } from "react-native";
-// TODO: In newer version of GH, import the Reanimated version
-// import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
 import Swipeable from "react-native-gesture-handler/Swipeable";
-import CustomButton from "../general/CustomButton";
+
+import { ExerciseSet } from "@/types/models";
+import CustomButton from "@/components/general/CustomButton";
+import { View, Text, TextInput } from "@/components/general/Themed";
 
 type SetItem = {
   index: number;

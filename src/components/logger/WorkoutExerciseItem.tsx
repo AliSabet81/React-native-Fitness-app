@@ -1,9 +1,11 @@
-import Card from "@/components/general/Card";
-import { View, Text } from "@/components/general/Themed";
 import { StyleSheet } from "react-native";
+
+import Card from "@/components/general/Card";
+import { ExerciseWithSets } from "@/types/models";
+import { View, Text } from "@/components/general/Themed";
+import CustomButton from "@/components/general/CustomButton";
+
 import SetItem from "./SetItem";
-import { ExerciseSet, ExerciseWithSets } from "@/types/models";
-import CustomButton from "../general/CustomButton";
 
 type WorkoutExerciseItem = {
   exercise: ExerciseWithSets;

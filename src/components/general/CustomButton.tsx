@@ -1,27 +1,28 @@
-import { ComponentProps, forwardRef, ReactNode } from 'react';
 import {
   StyleSheet,
   View,
   StyleProp,
   ViewStyle,
   Pressable,
-} from 'react-native';
-import { Text, useThemeColor } from '@/components/general/Themed';
+} from "react-native";
+import { ComponentProps, forwardRef, ReactNode } from "react";
+
+import { Text, useThemeColor } from "@/components/general/Themed";
 
 type CustomButton = {
   rightIcon?: ReactNode;
   title: string;
   style?: StyleProp<ViewStyle>;
-  type?: 'primary' | 'outline' | 'link';
+  type?: "primary" | "outline" | "link";
   color?: string;
 } & ComponentProps<typeof Pressable>;
 
 const CustomButton = forwardRef<View, CustomButton>(
   (
-    { rightIcon, title, style, type = 'primary', color, ...pressableProps },
+    { rightIcon, title, style, type = "primary", color, ...pressableProps },
     ref
   ) => {
-    const tint = color || useThemeColor({}, 'tint');
+    const tint = color || useThemeColor({}, "tint");
 
     return (
       <Pressable
@@ -29,17 +30,17 @@ const CustomButton = forwardRef<View, CustomButton>(
         {...pressableProps}
         style={[
           styles.button,
-          type === 'outline' && { borderColor: tint, borderWidth: 2 },
-          type === 'primary' && { backgroundColor: tint },
-          type === 'link' && { backgroundColor: 'transparent' },
+          type === "outline" && { borderColor: tint, borderWidth: 2 },
+          type === "primary" && { backgroundColor: tint },
+          type === "link" && { backgroundColor: "transparent" },
           style,
         ]}
       >
         <Text
           style={[
             styles.buttonText,
-            type === 'outline' && { color: tint },
-            type === 'link' && { color: tint },
+            type === "outline" && { color: tint },
+            type === "link" && { color: tint },
           ]}
         >
           {title}
@@ -53,19 +54,19 @@ const CustomButton = forwardRef<View, CustomButton>(
 const styles = StyleSheet.create({
   button: {
     padding: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     gap: 20,
-    width: '100%',
+    width: "100%",
   },
   buttonText: {
-    color: 'black',
-    fontWeight: '600',
+    color: "black",
+    fontWeight: "600",
     fontSize: 16,
     letterSpacing: 0.5,
   },
   rightIconContainer: {
-    position: 'absolute',
+    position: "absolute",
     right: 20,
   },
 });

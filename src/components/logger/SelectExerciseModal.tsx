@@ -1,10 +1,11 @@
-import CustomButton from '@/components/general/CustomButton';
-import { FlatList, Modal, Pressable, StyleSheet } from 'react-native';
-import { View, Text, TextInput } from '@/components/general/Themed';
-import Card from '@/components/general/Card';
-import AntDesign from '@expo/vector-icons/AntDesign';
-import { useState } from 'react';
-import exercises from '@/data/exercises';
+import { useState } from "react";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import { FlatList, Modal, Pressable, StyleSheet } from "react-native";
+
+import exercises from "@/data/exercises";
+import Card from "@/components/general/Card";
+import CustomButton from "@/components/general/CustomButton";
+import { View, Text, TextInput } from "@/components/general/Themed";
 
 type SelectExerciseModal = {
   onSelectExercise: (name: string) => void;
@@ -14,7 +15,7 @@ export default function SelectExerciseModal({
   onSelectExercise,
 }: SelectExerciseModal) {
   const [isOpen, setIsOpen] = useState(false);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
 
   const filteredExercises = exercises.filter((exercise) =>
     exercise.name.toLowerCase().includes(search.toLowerCase())
@@ -62,8 +63,8 @@ export default function SelectExerciseModal({
                   }}
                   style={{ gap: 3 }}
                 >
-                  <Text style={{ fontWeight: 'bold' }}>{item.name}</Text>
-                  <Text style={{ color: 'gray' }}>{item.muscle}</Text>
+                  <Text style={{ fontWeight: "bold" }}>{item.name}</Text>
+                  <Text style={{ color: "gray" }}>{item.muscle}</Text>
                 </Pressable>
               )}
             />
@@ -77,16 +78,16 @@ export default function SelectExerciseModal({
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: 'rgba(0,0,0, 0.8)',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "rgba(0,0,0, 0.8)",
+    alignItems: "center",
+    justifyContent: "center",
   },
   modalContent: {
-    width: '90%',
-    height: '80%',
+    width: "90%",
+    height: "80%",
   },
   closeButton: {
-    position: 'absolute',
+    position: "absolute",
     right: 10,
     top: 10,
   },

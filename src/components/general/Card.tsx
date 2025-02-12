@@ -1,7 +1,8 @@
-import { Link } from 'expo-router';
-import React from 'react';
-import { StyleSheet, Pressable, StyleProp, ViewStyle } from 'react-native';
-import { View, Text, useThemeColor } from '@/components/general/Themed';
+import React from "react";
+import { Link } from "expo-router";
+import { StyleSheet, Pressable, StyleProp, ViewStyle } from "react-native";
+
+import { View, Text, useThemeColor } from "@/components/general/Themed";
 
 type CardProps = {
   title: string;
@@ -11,7 +12,7 @@ type CardProps = {
 };
 
 export default function Card({ title, children, href, style }: CardProps) {
-  const tint = useThemeColor({}, 'tint');
+  const tint = useThemeColor({}, "tint");
   const cardContent = (
     <View style={[styles.card, { borderLeftColor: tint }, style]}>
       <Text style={styles.title}>{title}</Text>
@@ -36,7 +37,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     marginBottom: 8,
   },
 });
