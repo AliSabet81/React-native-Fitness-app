@@ -3,7 +3,7 @@ import {
   DefaultTheme,
   DarkTheme,
 } from "@react-navigation/native";
-import { dbName } from "@/db";
+import { dbName, getDB } from "@/db";
 import { Stack } from "expo-router";
 import * as SQLite from "expo-sqlite";
 import { useColorScheme } from "react-native";
@@ -16,7 +16,7 @@ DarkTheme.colors.primary = Colors.dark.tint;
 DefaultTheme.colors.primary = Colors.light.tint;
 
 const db = SQLite.openDatabaseSync(dbName);
-
+getDB();
 // SQLite.deleteDatabaseSync(dbName);
 
 export default function RootLayout() {

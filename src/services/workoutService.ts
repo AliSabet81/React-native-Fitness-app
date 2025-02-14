@@ -5,6 +5,7 @@ import {
   cleanExercise,
   getExerciseTotalWeight,
 } from "@/services/exerciseService";
+import { saveWorkout } from "@/db/workouts";
 
 export const getWorkoutTotalWeight = (workout: WorkoutWithExercises) => {
   return workout.exercises.reduce(
@@ -22,6 +23,7 @@ export const newWorkout = () => {
   };
 
   // save to database
+  saveWorkout(newWorkout);
 
   return newWorkout;
 };
@@ -33,6 +35,8 @@ export const finishWorkout = (workout: WorkoutWithExercises) => {
     ...cleanedWorkout,
     finishedAt: new Date(),
   };
+
+  saveWorkout(finishedWorkout);
 
   return finishedWorkout;
 };
