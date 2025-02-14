@@ -25,7 +25,6 @@ export const updateSet = (
   set: ExerciseSet,
   updatedFields: Pick<ExerciseSet, "reps" | "weight">
 ) => {
-  console.log("Update");
   const updatedSet = { ...set };
 
   if (updatedFields.reps !== undefined) {
