@@ -46,3 +46,20 @@ export const getCurrentWorkout = async (): Promise<Workout | null> => {
     return null;
   }
 };
+
+export const getWorkouts = async (): Promise<Workout[]> => {
+  try {
+    const db = await getDB();
+
+    const workout = await db.getAllAsync<DbWorkout>(`
+      SELECT * FROM workouts
+      WHERE finished_at IS NOT NULL
+      ORDER BY created_at DESC
+      `);
+
+    return workout.map(parseWorkout);
+  } catch (e) {
+    console.log(e);
+    return [];
+  }
+};

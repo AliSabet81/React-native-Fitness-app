@@ -5,7 +5,7 @@ import {
   cleanExercise,
   getExerciseTotalWeight,
 } from "@/services/exerciseService";
-import { getCurrentWorkout, saveWorkout } from "@/db/workouts";
+import { getCurrentWorkout, getWorkouts, saveWorkout } from "@/db/workouts";
 
 export const getWorkoutTotalWeight = (workout: WorkoutWithExercises) => {
   return workout.exercises.reduce(
@@ -60,3 +60,16 @@ export const getCurrentWorkoutWithExercises =
     }
     return null;
   };
+
+export const getWorkoutsWithExercises = async (): Promise<
+  WorkoutWithExercises[]
+> => {
+  const workouts = await getWorkouts();
+
+  const workoutWithExercises = workouts.map((workout) => ({
+    ...workout,
+    exercises: [],
+  }));
+
+  return workoutWithExercises;
+};

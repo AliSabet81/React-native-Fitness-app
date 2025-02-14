@@ -5,6 +5,7 @@ import { immer } from "zustand/middleware/immer";
 import {
   finishWorkout,
   getCurrentWorkoutWithExercises,
+  getWorkoutsWithExercises,
   newWorkout,
 } from "@/services/workoutService";
 import { createExercise } from "@/services/exerciseService";
@@ -35,13 +36,13 @@ type Actions = {
 
 export const useWorkouts = create<State & Actions>()(
   immer((set, get) => ({
-    // State
     currentWorkout: null,
     workouts: [],
 
     loadWorkouts: async () => {
       set({
         currentWorkout: await getCurrentWorkoutWithExercises(),
+        workouts: await getWorkoutsWithExercises(),
       });
     },
 
@@ -123,7 +124,6 @@ export const useWorkouts = create<State & Actions>()(
         exercise.sets = exercise.sets.filter((set) => set.id !== setId);
 
         if (exercise.sets.length === 0) {
-          // that was the last set
           currentWorkout.exercises = currentWorkout.exercises.filter(
             (ex) => ex.id !== exercise.id
           );
