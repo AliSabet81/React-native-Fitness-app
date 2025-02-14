@@ -11,6 +11,7 @@ import WorkoutExerciseItem from "@/components/logger/WorkoutExerciseItem";
 export default function CurrentWorkoutScreen() {
   const currentWorkout = useWorkouts((state) => state.currentWorkout);
   const finishWorkout = useWorkouts((state) => state.finishWorkout);
+  const addExercise = useWorkouts((state) => state.addExercise);
 
   const headerHeight = useHeaderHeight();
 
@@ -43,7 +44,7 @@ export default function CurrentWorkoutScreen() {
           ListHeaderComponent={<WorkoutHeader />}
           ListFooterComponent={
             <SelectExerciseModal
-              onSelectExercise={(name) => console.warn("add")}
+              onSelectExercise={(name) => addExercise(name)}
             />
           }
         />

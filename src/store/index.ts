@@ -3,6 +3,7 @@ import { immer } from "zustand/middleware/immer";
 
 import { WorkoutWithExercises } from "@/types/models";
 import { finishWorkout, newWorkout } from "@/services/workoutService";
+import { createExercise } from "@/services/exerciseService";
 
 type State = {
   currentWorkout: WorkoutWithExercises | null;
@@ -12,6 +13,8 @@ type State = {
 type Actions = {
   startWorkout: () => void;
   finishWorkout: () => void;
+
+  addExercise: (name: string) => void;
 };
 
 export const useWorkouts = create<State & Actions>()(
@@ -36,6 +39,22 @@ export const useWorkouts = create<State & Actions>()(
       set((state) => ({
         currentWorkout: null,
         workouts: [finishedWorkout, ...state.workouts],
+      }));
+    },
+
+    addExercise: (name: string) => {
+      const { currentWorkout } = get();
+      if (!currentWorkout) {
+        return;
+      }
+
+      const newExercise = createExercise(name, currentWorkout.id);
+
+      set((state) => ({
+        currentWorkout: state.currentWorkout && {
+          ...state.currentWorkout,
+          exercises: [...state.currentWorkout?.exercises, newExercise],
+        },
       }));
     },
   }))
