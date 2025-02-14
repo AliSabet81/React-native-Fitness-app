@@ -36,10 +36,10 @@ export const useWorkouts = create<State & Actions>()(
 
       const finishedWorkout = finishWorkout(currentWorkout);
 
-      set((state) => ({
-        currentWorkout: null,
-        workouts: [finishedWorkout, ...state.workouts],
-      }));
+      set((state) => {
+        state.currentWorkout = null;
+        state.workouts.unshift(finishedWorkout);
+      });
     },
 
     addExercise: (name: string) => {
@@ -50,12 +50,9 @@ export const useWorkouts = create<State & Actions>()(
 
       const newExercise = createExercise(name, currentWorkout.id);
 
-      set((state) => ({
-        currentWorkout: state.currentWorkout && {
-          ...state.currentWorkout,
-          exercises: [...state.currentWorkout?.exercises, newExercise],
-        },
-      }));
+      set((state) => {
+        state.currentWorkout?.exercises.push(newExercise);
+      });
     },
   }))
 );
