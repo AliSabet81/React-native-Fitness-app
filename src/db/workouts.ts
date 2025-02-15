@@ -1,6 +1,7 @@
-import { Workout } from "@/types/models";
-import { getDB } from ".";
 import { DbWorkout } from "@/types/db";
+import { Workout } from "@/types/models";
+
+import { getDB } from ".";
 
 export const saveWorkout = async (workout: Workout) => {
   // save it in database
