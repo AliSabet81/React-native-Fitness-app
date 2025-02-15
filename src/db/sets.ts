@@ -45,3 +45,12 @@ export const getSets = async (exerciseId: string): Promise<ExerciseSet[]> => {
     return [];
   }
 };
+
+export const deleteSet = async (id: string) => {
+  try {
+    const db = await getDB();
+    await db.runAsync("DELETE FROM sets WHERE id=?", id);
+  } catch (e) {
+    console.log(e);
+  }
+};
