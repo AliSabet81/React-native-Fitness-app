@@ -1,6 +1,7 @@
 import * as Crypto from "expo-crypto";
 
 import {
+  addSetsToExercise,
   cleanExercise,
   getExerciseTotalWeight,
 } from "@/services/exerciseService";
@@ -57,7 +58,7 @@ const addExercisesToWorkout = async (
   workout: Workout
 ): Promise<WorkoutWithExercises> => {
   const exercises = await getExercises(workout.id);
-  const exercisesWithSets = exercises.map((e) => ({ ...e, sets: [] }));
+  const exercisesWithSets = await Promise.all(exercises.map(addSetsToExercise));
 
   return {
     ...workout,
