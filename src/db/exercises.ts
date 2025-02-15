@@ -40,3 +40,13 @@ export const getExercises = async (workout_id: string): Promise<Exercise[]> => {
     return [];
   }
 };
+
+export const deleteExercise = async (id: string) => {
+  try {
+    const db = await getDB();
+
+    await db.runAsync("DELETE FROM exercises WHERE id=?", id);
+  } catch (e) {
+    console.log(e);
+  }
+};

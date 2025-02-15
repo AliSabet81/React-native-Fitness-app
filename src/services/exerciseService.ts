@@ -1,6 +1,6 @@
 import * as Crypto from "expo-crypto";
 
-import { saveExercise } from "@/db/exercises";
+import { deleteExercise, saveExercise } from "@/db/exercises";
 import { ExerciseWithSets } from "@/types/models";
 import { cleanSets, createSet, getSetTotalWeight } from "@/services/setService";
 
@@ -30,6 +30,7 @@ export const cleanExercise = (exercise: ExerciseWithSets) => {
   const cleanedSets = cleanSets(exercise.sets);
 
   if (cleanedSets.length === 0) {
+    deleteExercise(exercise.id);
     return null;
   }
 
